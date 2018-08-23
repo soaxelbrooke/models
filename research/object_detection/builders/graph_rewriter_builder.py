@@ -38,5 +38,8 @@ def build(graph_rewriter_config, is_training):
     else:
       tf.contrib.quantize.create_eval_graph(input_graph=tf.get_default_graph())
 
+    # Set random seed from configs for reproducibility
+    tf.set_random_seed(graph_rewriter_config.random_seed)
+
     tf.contrib.layers.summarize_collection('quant_vars')
   return graph_rewrite_fn
